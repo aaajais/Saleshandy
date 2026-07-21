@@ -1,169 +1,145 @@
-# Cypress UI-only POM: Personal, Business, and Client Accounts
+# Saleshandy Cypress Automation Assignment
 
-This project is a commented Cypress Page Object Model example for testing three account types with one reusable test flow:
+This workspace contains a Cypress end-to-end automation project for the Saleshandy signup and onboarding flow. The tests use a simple Page Object Model approach to exercise the UI for three account types: Personal, Business, and Client.
 
-- Personal
-- Business
-- Client
+## What the project covers
 
-The example does **not** use `cy.request()` or `cy.intercept()`. Login, session validation, navigation, profile update, and logout are performed through the browser UI.
+- Opens the Saleshandy login page
+- Starts the signup flow
+- Enters user details from fixture data
+- Selects the appropriate account type
+- Verifies the onboarding screens for each account type
+
+## Automation Coverage Summary
+
+### Test Scope
+The project covers the **Saleshandy signup and onboarding flow** with automated testing for three account types: Personal, Business, and Client.
+
+### Core Functionality Tested
+
+| Functionality | Coverage |
+|---|---|
+| **Authentication Flow** | Login page navigation, Signup button click |
+| **User Registration** | First name, Last name, Email, Password entry |
+| **Account Type Selection** | Personal Use, Business, Client |
+| **Onboarding Verification** | Account-specific onboarding screens and UI elements |
+
+### Account Type Coverage
+
+**Personal Account**
+- Personal/Freelancer UI verification
+- Primary Goal screen
+- Usage information screen
+- Monthly emails setup
+- Find Us screen
+- Personal Dashboard
+
+**Business Account**
+- Business Dashboard UI verification
+- "Yes, I have..." screen
+- Usage information screen
+- Find Us screen
+- Business Dashboard completion
+
+**Client Account**
+- Client-specific onboarding flow
+
+### Test Data
+- **3 test users** defined in fixtures (`users.json`)
+- **Unique emails** required for each test run to avoid conflicts
+
+### Test Execution Details
+- **Test Cases**: 3 parameterized test cases (one per account type)
+- **Approach**: Page Object Model (POM)
+- **Execution Modes**: Interactive (Cypress open) and Headless
+
+### UI Elements Tested
+- Input fields: First name, Last name, email, password
+- Submit button
+- Account type selection buttons/dropdowns
+- Onboarding screen elements and navigation
+
+### Coverage Limitations
+- No API-level validation
+- No error handling scenarios (invalid credentials, duplicate emails)
+- No negative test cases
+- Single happy path per account type
 
 ## Project structure
 
 ```text
-cypress-pom-multi-account-ui-only/
+Saleshandy/
 ├── cypress/
 │   ├── e2e/
-│   │   └── account-types.cy.js
+│   │   └── signup.cy.js
+│   ├── fixtures/
+│   │   └── users.json
 │   ├── pages/
-│   │   ├── LoginPage.js
-│   │   ├── DashboardPage.js
-│   │   ├── FeaturePage.js
-│   │   └── ProfilePage.js
-│   ├── test-data/
-│   │   └── accountTypes.js
+│   │   └── SignupPage.js
 │   └── support/
 │       └── e2e.js
 ├── cypress.config.js
-├── cypress.env.json
-├── cypress.env.example.json
 ├── package.json
-└── .gitignore
+└── README.md
 ```
 
-## Before running
+## Project setup steps
 
-### 1. Update the application URL
+1. Install Node.js and npm on your machine.
+2. Open the project folder:
 
-Open `cypress.config.js` and replace:
-
-```javascript
-baseUrl: 'http://localhost:3000'
+```bash
+cd Saleshandy
 ```
 
-with your local, QA, or staging application URL.
-
-### 2. Update credentials
-
-Open `cypress.env.json` and replace the example values with real test-user credentials.
-
-The example expects three separate users:
-
-```text
-Personal user -> PERSONAL_EMAIL / PERSONAL_PASSWORD
-Business user -> BUSINESS_EMAIL / BUSINESS_PASSWORD
-Client user   -> CLIENT_EMAIL / CLIENT_PASSWORD
-```
-
-### 3. Replace example selectors and routes
-
-The project uses example `data-cy` selectors such as:
-
-```text
-login-page
-login-email
-login-password
-login-submit
-dashboard-page
-dashboard-title
-current-account-type
-nav-dashboard
-nav-profile
-```
-
-Update the selectors in the Page Object files to match your application.
-
-Also update example routes such as:
-
-```text
-/login
-/dashboard
-/settings/profile
-/subscription
-/team
-/projects
-```
-
-### 4. Check the account permissions
-
-Update `cypress/test-data/accountTypes.js` so that each account has the correct:
-
-- Dashboard title
-- Visible menus
-- Hidden menus
-- Main feature
-- Profile test data
-
-## Install
+3. Install the dependencies:
 
 ```bash
 npm install
 ```
 
-## Run in the Cypress UI
+4. Update the test data in `cypress/fixtures/users.json` with valid user details for the signup flow.
+5. Use a unique email address for each test run, because the signup flow may fail if the same email is used repeatedly under user.json file.
+6. Confirm the application URL in `cypress.config.js` is correct for the environment you want to test.
+7. Make sure the target website is accessible before running the tests.
 
-Start your application in one terminal, then run:
+## How to run the tests
 
-```bash
-npm run cy:open
-```
-
-Select:
-
-```text
-E2E Testing -> Browser -> account-types.cy.js
-```
-
-## Run from the terminal
-
-Run only the account test:
+Open Cypress in interactive mode:
 
 ```bash
-npm run cy:accounts
+npx cypress open
 ```
 
-Run it in Chrome:
+Run the spec in headless mode:
 
 ```bash
-npm run cy:accounts:chrome
+npx cypress run --spec "cypress/e2e/login.cy.js"
 ```
 
-Run all Cypress specs:
+Run the same spec in Chrome:
 
 ```bash
-npm run cy:run
+npx cypress run --browser chrome --spec "cypress/e2e/login.cy.js"
 ```
 
-## Important note about hidden menus
+## Tools and technologies used
 
-The example assumes restricted menu items are removed from the DOM:
+- Cypress for end-to-end UI automation
+- JavaScript for test implementation
+- Page Object Model for reusable UI interactions
+- JSON fixtures for test data management
+- Node.js and npm for project execution
 
-```javascript
-.should('not.exist')
-```
+## Assumptions made
 
-When your application keeps them in the DOM and hides them with CSS, change the assertion in `DashboardPage.js` to:
+- The application under test is accessible through the URL configured in `cypress.config.js`.
+- The signup form fields and onboarding UI elements match the selectors used in `cypress/pages/SignupPage.js`.
+- The test users in `cypress/fixtures/users.json` are valid and can complete the signup flow.
+- The test is intended to validate the UI behavior of the signup and onboarding experience rather than API-level interactions.
 
-```javascript
-.should('not.be.visible')
-```
+## Notes
 
-## Execution flow
-
-```text
-Read account configuration
-        ↓
-Read that account's email and password
-        ↓
-Create or restore its Cypress session
-        ↓
-Open and verify Dashboard
-        ↓
-Verify visible and restricted menus
-        ↓
-Open the account-specific feature
-        ↓
-Update the profile
-        ↓
-Log out
-```
+- The tests interact with the application through the browser UI.
+- The spec loops through the users defined in `cypress/fixtures/users.json`.
+- The page object file in `cypress/pages/SignupPage.js` contains the reusable selectors and verification steps.

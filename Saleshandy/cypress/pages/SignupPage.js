@@ -1,4 +1,4 @@
-class LoginPage {
+class SignupPage {
 
   visit() {
     cy.visit("/login", { failOnStatusCode: false });
@@ -82,9 +82,9 @@ class LoginPage {
     if (accountType === "Personal") {
       this.Personal_verifyPersonal_Freelancer_UI();
       this.Personal_verifyPrimaryGoalUI();
-      this.global_verifyUsageUI();
+      this.Global_verifyUsageUI();
       this.Personal_verifyMonthlyEmailsUI();
-      this.Personal_verifyFindUsUI();
+      this.Global_verifyFindUsUI();
       this.clickLetsGetStarted();
       this.verifyPersonal_DashboardUI();
     }
@@ -92,11 +92,22 @@ class LoginPage {
     if (accountType === "Business") {
       this.Business_verifyBusinessDashboardUI();
       this.Business_verify_yes_i_have();
-      this.global_verifyUsageUI();
+      this.Global_verifyUsageUI();
+      this.Global_verifyFindUsUI();
+      this.clickLetsGetStarted();
+      this.Business_BusinessDashboardUI();
     }
 
     if (accountType === "Client") {
-      this.verifyClientDashboardUI();
+      this.verifyClient_page();
+      this.how_many_clients();
+      this.Personal_verifyMonthlyEmailsUI();
+      this.Global_verifyFindUsUI();
+      this.clickLetsGetStarted();
+      this.verifySequenceDashboardUI();
+
+
+
     }
   }
   ///---------------------------for Personal account-------------------------------------------////
@@ -119,7 +130,7 @@ class LoginPage {
     cy.contains("Other").should("be.visible");
     cy.contains("Generate Leads for my Business").click();
   }
-  global_verifyUsageUI() {
+  Global_verifyUsageUI() {
     cy.contains("How would you use Saleshandy?")
       .should("be.visible");
     cy.contains("Cold Outreach").should("be.visible");
@@ -136,7 +147,7 @@ class LoginPage {
     cy.contains("More than 250K").should("be.visible");
     cy.contains("0 - 30K").click();
   }
-  Personal_verifyFindUsUI() {
+  Global_verifyFindUsUI() {
     cy.contains("How did you find us?")
       .should("be.visible");
     cy.contains("LinkedIn").should("be.visible");
@@ -153,20 +164,23 @@ class LoginPage {
   }
   //verify personal dashboard UI//
   verifyPersonal_DashboardUI() {
-    // Header
-    cy.contains("Welcome").should('be.visible');
-    cy.contains('0/4 steps completed').should('be.visible');
-    // Main Actions
-    cy.contains('Generate AI Sequence').should('be.visible');
-    cy.contains('Add Prospects').should('be.visible');
-    cy.contains('Add Email Account').should('be.visible');
-    cy.contains('Launch Sequence').should('be.visible');
-    // Buttons
-    cy.contains('Write With AI').should('be.visible');
-    cy.contains('Create Sequence').should('be.visible');
-    // Table
-    cy.contains('Sequence Name').should('be.visible');
-    cy.contains('Draft').should('be.visible');
+
+    const labels = [
+      "Welcome",
+      "0/4 steps completed",
+      "Generate AI Sequence",
+      "Add Prospects",
+      "Add Email Account",
+      "Launch Sequence",
+      "Write With AI",
+      "Create Sequence",
+      "Sequence Name",
+      "Draft"
+    ];
+
+    labels.forEach(label => {
+      cy.contains(label).should("be.visible");
+    });
 
   }
 
@@ -189,37 +203,116 @@ class LoginPage {
     cy.contains('Have you used a cold outreach tool like Saleshandy before?')
       .should('be.visible');
     // Verify all option buttons
-    cy.contains('button', 'Yes, I have')
+    cy.contains('Yes, I have')
       .should('be.visible');
-    cy.contains('button', 'No, I have not')
+    cy.contains('No, I have not')
       .should('be.visible');
-    cy.contains('button', "Not exactly, but I've used an email marketing tool")
+    cy.contains("Not exactly, but I've used an email marketing tool")
       .should('be.visible');
     // Click "Yes, I have"
-    cy.contains('button', 'Yes, I have').click();
+    cy.contains('Yes, I have').click();
+  }
+
+  //verify business landing dashboard UI//
+  Business_BusinessDashboardUI() {
+
+    const labels = [
+      "Generate AI Sequence",
+      "Create Sequence",
+      "Add Prospects",
+      "Add Email Account",
+      "Launch Sequence",
+      "Create New Sequence",
+      "Write With AI",
+      "Search here...",
+      "Status (All)",
+      "Sequence Name",
+      "Sequence Progress",
+      "Score",
+      "Prospect",
+      "Contacted",
+      "Opened",
+      "Replied",
+      "Positive",
+      "Email Accounts",
+      "Inbox Score"
+    ];
+
+    labels.forEach(label => {
+      cy.contains(label).should("be.visible");
+    });
+
   }
 
   ////---------------------------for Client account-------------------------------------------////
-
-
-
-
-
-  verifyClientDashboardUI() {
-    cy.contains("AI NOC");
-    cy.contains("Topology");
-    cy.contains("Fault Management");
-    cy.contains("Performance Management");
-    cy.contains("Traffic");
-    cy.contains("Anomaly Detection");
-    cy.contains("Service Management");
-    cy.contains("Inventory Management");
-    cy.contains("Subscriber Analytics");
-    cy.contains("Audit");
-    cy.contains("Roles");
-    cy.contains("Admin");
+  verifyClient_page() {
+    cy.contains("What type of agency are you?").should("be.visible");
+    cy.contains("Lead Generation Agency").should("be.visible");
+    cy.contains("Sales Agency").should("be.visible");
+    cy.contains("Digital Marketing Agency").should("be.visible");
+    cy.contains("Social Media Agency").should("be.visible");
+    cy.contains("Recruitment Agency").should("be.visible");
+    cy.contains("Other").should("be.visible");
+    // Click Lead Generation Agency
+    cy.contains("Lead Generation Agency")
+      .click();
   }
+  how_many_clients() {
+    cy.contains("How many clients do you serve?").should("be.visible");
+    cy.contains("0 - 5").should("be.visible");
+    cy.contains("6 - 20").should("be.visible");
+    cy.contains("21 - 50").should("be.visible");
+    cy.contains("More than 50").should("be.visible");
+    // Click on "0 - 5"
+    cy.contains("0 - 5").click();
+  }
+
+  //verify client landingdashboard UI//
+  verifySequenceDashboardUI() {
+
+    const texts = [
+      "Generate AI Sequence",
+      "Create Sequence",
+      "Add Prospects",
+      "Add Email Account",
+      "Launch Sequence",
+      "Add Clients",
+      "Create New Sequence",
+      "Write With AI",
+      "Search here...",
+      "All clients",
+      "0 Sequence Ow...",
+      "Status (All)",
+      "Sequence Name",
+      "Sequence Progress",
+      "Score",
+      "Prospect",
+      "Contacted",
+      "Opened",
+      "Replied",
+      "Positive",
+      "Email Accounts",
+      "Inbox Score",
+      "Draft",
+      "Skip Onboarding"
+    ];
+
+    texts.forEach(text => {
+      cy.contains(text).should("be.visible");
+    });
+
+    // Dynamic text verification
+    cy.contains(/Welcome, .* Let's build your outreach/).should("be.visible");
+    cy.contains(/\d+\/\d+ steps completed/).should("be.visible");
+    cy.contains(/.*'s First Sequence.*/).should("be.visible");
+  }
+
+
+
+
+
+
 
 }
 
-export default new LoginPage();
+export default new SignupPage();

@@ -2,9 +2,9 @@
   {
     "type": "Personal",
     "accountType": "Personal Use",
-    "firstName": "John",
+    "firstName": "Harry",
     "lastName": "Doe",
-    "email": "vikashkumar@gmail.com",
+    "email": "harrypatebhai@gmail.com",
     "password": "Personal@123"
   },
   {
@@ -12,15 +12,15 @@
     "accountType": "Business",
     "firstName": "Jane",
     "lastName": "Smith",
-    "email": "ritupatel@gmail.com",
+    "email": "janesmithnath@gmail.com",
     "password": "Staging@1234"
   },
   {
     "type": "Client",
     "accountType": "Client",
     "firstName": "Alex",
-    "lastName": "Brown",
-    "email": "riyapatel@gmail.com",
+    "lastName": "Singh",
+    "email": "alexsingh20@gmail.com",
     "password": "Production@123"
   }
 ]
