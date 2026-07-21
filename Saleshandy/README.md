@@ -1,4 +1,4 @@
-# Saleshandy Cypress Automation Assignment
+# Saleshandy Cypress Automation
 
 This workspace contains a Cypress end-to-end automation project for the Saleshandy signup and onboarding flow. The tests use a simple Page Object Model approach to exercise the UI for three account types: Personal, Business, and Client.
 

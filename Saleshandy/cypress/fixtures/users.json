@@ -4,7 +4,7 @@
     "accountType": "Personal Use",
     "firstName": "Harry",
     "lastName": "Doe",
-    "email": "harrypatebhai@gmail.com",
+    "email": "raja.singh@gmail.com",
     "password": "Personal@123"
   },
   {
@@ -12,7 +12,7 @@
     "accountType": "Business",
     "firstName": "Jane",
     "lastName": "Smith",
-    "email": "janesmithnath@gmail.com",
+    "email": "sonu.singh@gmail.com",
     "password": "Staging@1234"
   },
   {
@@ -20,7 +20,7 @@
     "accountType": "Client",
     "firstName": "Alex",
     "lastName": "Singh",
-    "email": "alexsingh20@gmail.com",
+    "email": "gudiya.singh@gmail.com",
     "password": "Production@123"
   }
 ]

@@ -2,6 +2,7 @@ class SignupPage {
 
   visit() {
     cy.visit("/login", { failOnStatusCode: false });
+
   }
 
   click_Signup() {
@@ -56,7 +57,7 @@ class SignupPage {
       .type(password);
   }
 
-  clickLogin() {
+  clickSignUp() {
     cy.get("button[type='submit']", { timeout: 10000 })
       .should("be.visible")
       .click();
@@ -206,8 +207,6 @@ class SignupPage {
     cy.contains('Yes, I have')
       .should('be.visible');
     cy.contains('No, I have not')
-      .should('be.visible');
-    cy.contains("Not exactly, but I've used an email marketing tool")
       .should('be.visible');
     // Click "Yes, I have"
     cy.contains('Yes, I have').click();

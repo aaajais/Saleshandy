@@ -16,7 +16,7 @@ describe("Saleshandy Test", () => {
       SignupPage.enterLastName(user.lastName);
       SignupPage.enterEmail(user.email);
       SignupPage.enterPassword(user.password);
-      SignupPage.clickLogin();
+      SignupPage.clickSignUp();
       cy.wait(6000)
       SignupPage.selectAccountType(user.accountType);
       SignupPage.verifyLoginSuccess(user.type);
