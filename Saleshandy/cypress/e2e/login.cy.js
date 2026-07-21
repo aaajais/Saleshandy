@@ -8,7 +8,7 @@ describe("Saleshandy Test", () => {
     it(`Login as ${user.type}`, () => {
 
       cy.log(`Account Type: ${user.type}`);
-      cy.log(`Email: ${user.email}`);
+      cy.log(`Email: ${user.email}`)
 
       LoginPage.visit();
       LoginPage.click_Signup();
