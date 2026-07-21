@@ -1,0 +1,15 @@
+{
+  "name": "cypress-pom-multi-account-ui-only",
+  "version": "1.0.0",
+  "private": true,
+  "description": "UI-only Cypress Page Object Model example for Personal, Business, and Client accounts.",
+  "scripts": {
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
+    "cy:accounts": "cypress run --spec \"cypress/e2e/account-types.cy.js\"",
+    "cy:accounts:chrome": "cypress run --browser chrome --spec \"cypress/e2e/account-types.cy.js\""
+  },
+  "devDependencies": {
+    "cypress": "^15.10.0"
+  }
+}

@@ -1,0 +1,26 @@
+[
+  {
+    "type": "Personal",
+    "accountType": "Personal Use",
+    "firstName": "John",
+    "lastName": "Doe",
+    "email": "vikashkumar@gmail.com",
+    "password": "Personal@123"
+  },
+  {
+    "type": "Business",
+    "accountType": "Business",
+    "firstName": "Jane",
+    "lastName": "Smith",
+    "email": "ritupatel@gmail.com",
+    "password": "Staging@1234"
+  },
+  {
+    "type": "Client",
+    "accountType": "Client",
+    "firstName": "Alex",
+    "lastName": "Brown",
+    "email": "riyapatel@gmail.com",
+    "password": "Production@123"
+  }
+]

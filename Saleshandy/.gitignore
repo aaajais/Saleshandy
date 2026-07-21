@@ -1,0 +1,13 @@
+# Installed npm packages
+node_modules/
+
+# Contains test credentials; do not commit it
+cypress.env.json
+
+# Cypress-generated artifacts
+cypress/screenshots/
+cypress/videos/
+
+# Other environment files
+.env
+.env.local
